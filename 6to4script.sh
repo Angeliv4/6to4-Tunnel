@@ -1,19 +1,26 @@
+#! /bin/bash
 echo "6to4 Tunnel FOR IRAN SERVER"
-echo "Please Enter IPv4 IRAN "
+echo ""
+echo "Please Enter IPv4 IRAN : "
+echo ""
 read ip_iran
-echo "Please Enter IPv4 KHAREJ"
+echo "Please Enter IPv4 KHAREJ : "
+echo ""
 read ip_kharej
+echo ""
 echo "Which one to choose:
+
 1 == Tunnel IRAN
 2 == Tunnel KHAREJ
 3 == Remove Tunnel IRAN
 4 == Remove Tunnel Kharej
+
 Enter Number Activity : " 
 read act
 if [ $act -eq 1 ]
 then
 	touch /etc/rc.local
-	chmod +w "/etc/rc.local"
+	chmod +x "/etc/rc.local"
 	echo "#! /bin/bash
 ip tunnel add 6to4_To_KH mode sit remote $ip_kharej local $ip_iran
 ip -6 addr add fde8:b030:25cf::de01/64 dev 6to4_To_KH
@@ -31,11 +38,11 @@ iptables -t nat -A PREROUTING -j DNAT --to-destination 172.20.20.2
 iptables -t nat -A POSTROUTING -j MASQUERADE 
 
 exit 0" > /etc/rc.local
-	
+	/etc/rc.local
 elif [ $act -eq 2 ]
 then
 	touch /etc/rc.local
-	chmod +w "/etc/rc.local"
+	chmod +x "/etc/rc.local"
 	echo "#! /bin/bash
 ip tunnel add 6to4_To_IR mode sit remote $ip_iran local $ip_kharej
 ip -6 addr add fde8:b030:25cf::de02/64 dev 6to4_To_IR
@@ -48,6 +55,7 @@ ip link set GRE6Tun_To_IR mtu 1436
 ip link set GRE6Tun_To_IR up
 
 exit 0" > /etc/rc.local
+	/etc/rc.local
 
 elif [ $act -eq 3 ]
 then 
