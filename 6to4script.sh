@@ -23,6 +23,10 @@ Enter Number Activity : " act
 	then
 		touch /etc/rc.local
 		chmod +x "/etc/rc.local"
+		echo "ip tunnel add 6to4_To_KH mode sit remote $ip_kharej local $ip_iran
+ip -6 addr add fde8:b030:25cf::de01/64 dev 6to4_To_KH
+ip link set 6to4_To_KH mtu 1480
+ip link set 6to4_To_KH up"
 		echo "#! /bin/bash
 ip tunnel add 6to4_To_KH mode sit remote $ip_kharej local $ip_iran
 ip -6 addr add fde8:b030:25cf::de01/64 dev 6to4_To_KH
@@ -45,6 +49,10 @@ exit 0" > /etc/rc.local
 	then
 		touch /etc/rc.local
 		chmod +x "/etc/rc.local"
+		echo "ip tunnel add 6to4_To_IR mode sit remote $ip_iran local $ip_kharej
+ip -6 addr add fde8:b030:25cf::de02/64 dev 6to4_To_IR
+ip link set 6to4_To_IR mtu 1480
+ip link set 6to4_To_IR up"
 		echo "#! /bin/bash
 ip tunnel add 6to4_To_IR mode sit remote $ip_iran local $ip_kharej
 ip -6 addr add fde8:b030:25cf::de02/64 dev 6to4_To_IR
