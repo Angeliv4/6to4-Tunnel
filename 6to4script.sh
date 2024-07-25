@@ -31,10 +31,6 @@ Enter Number Activity : " act
 		ip addr add 172.20.20.1/30 dev GRE6Tun_To_KH
 		ip link set GRE6Tun_To_KH mtu 1436
 		ip link set GRE6Tun_To_KH up
-		sysctl net.ipv4.ip_forward=1
-		iptables -t nat -A PREROUTING -p tcp --dport $ssh_port -j DNAT --to-destination 172.20.20.1
-		iptables -t nat -A PREROUTING -j DNAT --to-destination 172.20.20.2
-		iptables -t nat -A POSTROUTING -j MASQUERADE
 		echo "#! /bin/bash
 ip tunnel add 6to4_To_KH mode sit remote $ip_kharej local $ip_iran
 ip -6 addr add fde8:b030:25cf::de01/64 dev 6to4_To_KH
