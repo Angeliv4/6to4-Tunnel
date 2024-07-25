@@ -4,9 +4,14 @@ echo ""
 echo "Please Enter IPv4 IRAN : "
 echo ""
 read ip_iran
+echo ""
 echo "Please Enter IPv4 KHAREJ : "
 echo ""
 read ip_kharej
+echo ""
+echo "Please Enter Port SSH : "
+echo ""
+read ssh_port
 echo ""
 echo "Which one to choose:
 
@@ -34,7 +39,7 @@ ip link set GRE6Tun_To_KH mtu 1436
 ip link set GRE6Tun_To_KH up
 
 sysctl net.ipv4.ip_forward=1
-iptables -t nat -A PREROUTING -p tcp --dport 22 -j DNAT --to-destination 172.20.20.1
+iptables -t nat -A PREROUTING -p tcp --dport $ssh_port -j DNAT --to-destination 172.20.20.1
 iptables -t nat -A PREROUTING -j DNAT --to-destination 172.20.20.2
 iptables -t nat -A POSTROUTING -j MASQUERADE 
 
