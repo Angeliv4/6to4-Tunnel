@@ -1,5 +1,5 @@
 #! /bin/bash
-echo "6to4 Tunnel FOR IRAN SERVER"
+echo "6to4 Tunnel SCRIPT "
 echo ""
 read -p "Please Enter IPv4 IRAN : " ip_iran
 echo ""
@@ -23,11 +23,13 @@ Enter Number Activity : " act
 	then
 		touch /etc/rc.local
 		chmod +x "/etc/rc.local"
-		ip tunnel add 6to4_To_KH mode sit remote $ip_kharej local $ip_iran
-		ip -6 addr add fc00::1/64 dev 6to4_To_KH
-		ip link set 6to4_To_KH mtu 1480
-		ip link set 6to4_To_KH up
-		sleep 2m
+		echo "ip tunnel add 6to4_To_KH mode sit remote $ip_kharej local $ip_iran
+ip -6 addr add fc00::1/64 dev 6to4_To_KH
+ip link set 6to4_To_KH mtu 1480
+ip link set 6to4_To_KH up"
+		echo "Please configure any server and wait 1 minute !"
+		sleep 1m
+		
 		echo "#! /bin/bash
 ip tunnel add 6to4_To_KH mode sit remote $ip_kharej local $ip_iran
 ip -6 addr add fc00::1/64 dev 6to4_To_KH
@@ -50,11 +52,12 @@ exit 0" > /etc/rc.local
 	then
 		touch /etc/rc.local
 		chmod +x "/etc/rc.local"
-		ip tunnel add 6to4_To_IR mode sit remote $ip_iran local $ip_kharej
-		ip -6 addr add fc00::2/64 dev 6to4_To_IR
-		ip link set 6to4_To_IR mtu 1480
-		ip link set 6to4_To_IR up
-		sleep 2m
+		echo "ip tunnel add 6to4_To_IR mode sit remote $ip_iran local $ip_kharej
+ip -6 addr add fc00::2/64 dev 6to4_To_IR
+ip link set 6to4_To_IR mtu 1480
+ip link set 6to4_To_IR up"
+		echo "Please configure any server and wait 1 minute !"
+		sleep 1m
 		echo "#! /bin/bash
 ip tunnel add 6to4_To_IR mode sit remote $ip_iran local $ip_kharej
 ip -6 addr add fc00::2/64 dev 6to4_To_IR
