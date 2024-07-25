@@ -27,6 +27,7 @@ Enter Number Activity : " act
 		ip -6 addr add fc00::1/64 dev 6to4_To_KH
 		ip link set 6to4_To_KH mtu 1480
 		ip link set 6to4_To_KH up
+		sleep 2m
 		echo "#! /bin/bash
 ip tunnel add 6to4_To_KH mode sit remote $ip_kharej local $ip_iran
 ip -6 addr add fc00::1/64 dev 6to4_To_KH
@@ -53,6 +54,7 @@ exit 0" > /etc/rc.local
 		ip -6 addr add fc00::2/64 dev 6to4_To_IR
 		ip link set 6to4_To_IR mtu 1480
 		ip link set 6to4_To_IR up
+		sleep 2m
 		echo "#! /bin/bash
 ip tunnel add 6to4_To_IR mode sit remote $ip_iran local $ip_kharej
 ip -6 addr add fc00::2/64 dev 6to4_To_IR
