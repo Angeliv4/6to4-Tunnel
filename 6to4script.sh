@@ -16,6 +16,7 @@ echo "Which one to choose:
 4 == Remove Tunnel Kharej
 
 Enter Number Activity : " 
+echo ""
 read act
 if [ $act -eq 1 ]
 then
