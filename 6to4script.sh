@@ -2,7 +2,7 @@
 echo "6to4 Tunnel SCRIPT "
 echo ""
 echo ""
-	read -p "Which one to choose:
+read -p "Which one to choose:
 
 1 == Tunnel IRAN
 2 == Tunnel KHAREJ
