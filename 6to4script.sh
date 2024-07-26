@@ -1,5 +1,8 @@
 #! /bin/bash
-echo "6to4 Tunnel SCRIPT "
+echo ""
+echo ""
+echo ""
+echo "ANGEL 6to4 Tunnel SCRIPT "
 echo ""
 echo ""
 read -p "Which one to choose:
@@ -21,6 +24,7 @@ Enter Number Activity : " act
 		then
 			echo "Invalid SSH Port !! "
 		else
+		fi
 	echo ""
 		ip tunnel add 6to4_To_KH mode sit remote $ip_kharej local $ip_iran
 		ip -6 addr add fc00::1/64 dev 6to4_To_KH
