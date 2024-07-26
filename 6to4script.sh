@@ -2,7 +2,7 @@
 echo ""
 echo ""
 echo ""
-echo "ANGEL 6to4 Tunnel SCRIPT "
+echo "ANGEL IV 6to4 Tunnel SCRIPT "
 echo ""
 echo ""
 read -p "Which one to choose:
@@ -15,24 +15,25 @@ read -p "Which one to choose:
 Enter Number Activity : " act
 	if [ $act -eq 1 ]
 	then
+		echo ""
+		echo ""
 		read -p "Please Enter IPv4 IRAN : " ip_iran
 		echo ""
+		echo ""
 		read -p "Please Enter IPv4 KHAREJ : " ip_kharej
+		echo ""
 		echo ""
 		read -p "Please Enter Port SSH : " ssh_port
 		if ! [[ $ssh_port =~ ^[0-9]+$ ]]
 		then
 			echo "Invalid SSH Port !! "
 		else
-			continue
-		fi
-	echo ""
-		ip tunnel add 6to4_To_KH mode sit remote $ip_kharej local $ip_iran
-		ip -6 addr add fc00::1/64 dev 6to4_To_KH
-		ip link set 6to4_To_KH mtu 1480
-		ip link set 6to4_To_KH up
-		touch /etc/rc.local
-		echo "#! /bin/bash
+			ip tunnel add 6to4_To_KH mode sit remote $ip_kharej local $ip_iran
+			ip -6 addr add fc00::1/64 dev 6to4_To_KH
+			ip link set 6to4_To_KH mtu 1480
+			ip link set 6to4_To_KH up
+			touch /etc/rc.local
+			echo "#! /bin/bash
 ip tunnel add 6to4_To_KH mode sit remote $ip_kharej local $ip_iran
 ip -6 addr add fc00::1/64 dev 6to4_To_KH
 ip link set 6to4_To_KH mtu 1480
@@ -49,15 +50,21 @@ iptables -t nat -A PREROUTING -j DNAT --to-destination 192.168.13.2
 iptables -t nat -A POSTROUTING -j MASQUERADE 
 
 exit 0" > /etc/rc.local
-		chmod +x /etc/rc.local
-		echo "Please configure other server and wait ..."
-		sleep 1m
-		/etc/rc.local
+			chmod +x /etc/rc.local
+			echo "Please configure other server and wait ..."
+			sleep 1m
+			/etc/rc.local
+		fi
+	
 	elif [ $act -eq 2 ]
 	then
+		echo ""
+		echo ""
 		read -p "Please Enter IPv4 IRAN : " ip_iran
 		echo ""
+		echo ""
 		read -p "Please Enter IPv4 KHAREJ : " ip_kharej
+		echo ""
 		echo ""
 		ip tunnel add 6to4_To_IR mode sit remote $ip_iran local $ip_kharej
 		ip -6 addr add fc00::2/64 dev 6to4_To_IR
@@ -92,6 +99,7 @@ exit 0" > /etc/rc.local
 		iptables -P FORWARD ACCEPT
 		iptables -P OUTPUT ACCEPT
 		echo ""
+		echo ""
 		echo "Please reboot server !"
 	elif [ $act -eq 4 ]
 	then
@@ -99,6 +107,7 @@ exit 0" > /etc/rc.local
 		ip tunnel del 6to4_To_IR
 		ip tunnel del ipip6Tun_To_IR
 	else
+		echo ""
+		echo ""
 		echo "Invalid Input Activity !!"
 	fi
-fi
