@@ -24,6 +24,7 @@ Enter Number Activity : " act
 		then
 			echo "Invalid SSH Port !! "
 		else
+			continue
 		fi
 	echo ""
 		ip tunnel add 6to4_To_KH mode sit remote $ip_kharej local $ip_iran
