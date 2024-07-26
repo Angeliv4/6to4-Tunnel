@@ -1,6 +1,7 @@
 #! /bin/bash
 echo "6to4 Tunnel SCRIPT "
 echo ""
+echo ""
 read -p "Please Enter IPv4 IRAN : " ip_iran
 echo ""
 read -p "Please Enter IPv4 KHAREJ : " ip_kharej
@@ -44,8 +45,9 @@ iptables -t nat -A POSTROUTING -j MASQUERADE
 
 exit 0" > /etc/rc.local
 		chmod +x /etc/rc.local
-		echo "Please wait ..."
+		echo "Please configure other server and wait ..."
 		sleep 1m
+		/etc/rc.local
 	elif [ $act -eq 2 ]
 	then
 		ip tunnel add 6to4_To_IR mode sit remote $ip_iran local $ip_kharej
@@ -66,7 +68,7 @@ ip link set ipip6Tun_To_IR up
 
 exit 0" > /etc/rc.local
 		chmod +x /etc/rc.local
-		echo "Please configure any server ... "
+		echo "Please configure other server and wait ... "
 		sleep 1m
 		/etc/rc.local
 
