@@ -2,16 +2,6 @@
 echo "6to4 Tunnel SCRIPT "
 echo ""
 echo ""
-read -p "Please Enter IPv4 IRAN : " ip_iran
-echo ""
-read -p "Please Enter IPv4 KHAREJ : " ip_kharej
-echo ""
-read -p "Please Enter Port SSH : " ssh_port
-if ! [[ $ssh_port =~ ^[0-9]+$ ]]
-then
-    echo "Invalid SSH Port !! "
-else
-	echo ""
 	read -p "Which one to choose:
 
 1 == Tunnel IRAN
@@ -22,6 +12,16 @@ else
 Enter Number Activity : " act
 	if [ $act -eq 1 ]
 	then
+		read -p "Please Enter IPv4 IRAN : " ip_iran
+		echo ""
+		read -p "Please Enter IPv4 KHAREJ : " ip_kharej
+		echo ""
+		read -p "Please Enter Port SSH : " ssh_port
+		if ! [[ $ssh_port =~ ^[0-9]+$ ]]
+		then
+			echo "Invalid SSH Port !! "
+		else
+	echo ""
 		ip tunnel add 6to4_To_KH mode sit remote $ip_kharej local $ip_iran
 		ip -6 addr add fc00::1/64 dev 6to4_To_KH
 		ip link set 6to4_To_KH mtu 1480
@@ -50,6 +50,10 @@ exit 0" > /etc/rc.local
 		/etc/rc.local
 	elif [ $act -eq 2 ]
 	then
+		read -p "Please Enter IPv4 IRAN : " ip_iran
+		echo ""
+		read -p "Please Enter IPv4 KHAREJ : " ip_kharej
+		echo ""
 		ip tunnel add 6to4_To_IR mode sit remote $ip_iran local $ip_kharej
 		ip -6 addr add fc00::2/64 dev 6to4_To_IR
 		ip link set 6to4_To_IR mtu 1480
@@ -82,6 +86,8 @@ exit 0" > /etc/rc.local
 		iptables -P INPUT ACCEPT
 		iptables -P FORWARD ACCEPT
 		iptables -P OUTPUT ACCEPT
+		echo ""
+		echo "Please reboot server !"
 	elif [ $act -eq 4 ]
 	then
 		rm -rf /etc/rc.local
