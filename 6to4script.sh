@@ -3,7 +3,7 @@ echo ""
 echo ""
 echo "Angel IV 6to4 Tunnel SCRIPT "
 echo ""
-read -p "Which one to choose:
+read -p "Which One To Choose:
 
 1 == Tunnel IRAN
 2 == Tunnel KHAREJ
@@ -47,7 +47,7 @@ iptables -t nat -A POSTROUTING -j MASQUERADE
 
 exit 0" > /etc/rc.local
 			chmod +x /etc/rc.local
-			echo "Please configure other server and wait ..."
+			echo "Please Configure Other Server And Wait ..."
 			sleep 1m
 			/etc/rc.local
 		fi
@@ -77,7 +77,7 @@ ip link set ipip6Tun_To_IR up
 
 exit 0" > /etc/rc.local
 		chmod +x /etc/rc.local
-		echo "Please configure other server and wait ... "
+		echo "Please Configure Other Server And Wait ... "
 		sleep 1m
 		/etc/rc.local
 
@@ -92,7 +92,7 @@ exit 0" > /etc/rc.local
 		iptables -P FORWARD ACCEPT
 		iptables -P OUTPUT ACCEPT
 		echo ""
-		echo "Please reboot server !"
+		echo "Please Reboot Server !"
 	elif [ $act -eq 4 ]
 	then
 		rm -rf /etc/rc.local
