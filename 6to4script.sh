@@ -1,9 +1,7 @@
 #! /bin/bash
 echo ""
 echo ""
-echo ""
-echo "ANGEL IV 6to4 Tunnel SCRIPT "
-echo ""
+echo "Angel IV 6to4 Tunnel SCRIPT "
 echo ""
 read -p "Which one to choose:
 
@@ -16,14 +14,12 @@ Enter Number Activity : " act
 	if [ $act -eq 1 ]
 	then
 		echo ""
-		echo ""
 		read -p "Please Enter IPv4 IRAN : " ip_iran
-		echo ""
 		echo ""
 		read -p "Please Enter IPv4 KHAREJ : " ip_kharej
 		echo ""
-		echo ""
 		read -p "Please Enter Port SSH : " ssh_port
+		echo ""
 		if ! [[ $ssh_port =~ ^[0-9]+$ ]]
 		then
 			echo "Invalid SSH Port !! "
@@ -59,12 +55,9 @@ exit 0" > /etc/rc.local
 	elif [ $act -eq 2 ]
 	then
 		echo ""
-		echo ""
 		read -p "Please Enter IPv4 IRAN : " ip_iran
 		echo ""
-		echo ""
 		read -p "Please Enter IPv4 KHAREJ : " ip_kharej
-		echo ""
 		echo ""
 		ip tunnel add 6to4_To_IR mode sit remote $ip_iran local $ip_kharej
 		ip -6 addr add fc00::2/64 dev 6to4_To_IR
@@ -99,7 +92,6 @@ exit 0" > /etc/rc.local
 		iptables -P FORWARD ACCEPT
 		iptables -P OUTPUT ACCEPT
 		echo ""
-		echo ""
 		echo "Please reboot server !"
 	elif [ $act -eq 4 ]
 	then
@@ -107,7 +99,6 @@ exit 0" > /etc/rc.local
 		ip tunnel del 6to4_To_IR
 		ip tunnel del ipip6Tun_To_IR
 	else
-		echo ""
 		echo ""
 		echo "Invalid Input Activity !!"
 	fi
