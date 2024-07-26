@@ -21,8 +21,11 @@ else
 Enter Number Activity : " act
 	if [ $act -eq 1 ]
 	then
+		ip tunnel add 6to4_To_KH mode sit remote $ip_kharej local $ip_iran
+		ip -6 addr add fc00::1/64 dev 6to4_To_KH
+		ip link set 6to4_To_KH mtu 1480
+		ip link set 6to4_To_KH up
 		touch /etc/rc.local
-		chmod +x "/etc/rc.local"
 		echo "#! /bin/bash
 ip tunnel add 6to4_To_KH mode sit remote $ip_kharej local $ip_iran
 ip -6 addr add fc00::1/64 dev 6to4_To_KH
@@ -40,11 +43,16 @@ iptables -t nat -A PREROUTING -j DNAT --to-destination 192.168.13.2
 iptables -t nat -A POSTROUTING -j MASQUERADE 
 
 exit 0" > /etc/rc.local
-		/etc/rc.local
+		chmod +x /etc/rc.local
+		echo "Please wait ..."
+		sleep 1m
 	elif [ $act -eq 2 ]
 	then
+		ip tunnel add 6to4_To_IR mode sit remote $ip_iran local $ip_kharej
+		ip -6 addr add fc00::2/64 dev 6to4_To_IR
+		ip link set 6to4_To_IR mtu 1480
+		ip link set 6to4_To_IR up
 		touch /etc/rc.local
-		chmod +x "/etc/rc.local"
 		echo "#! /bin/bash
 ip tunnel add 6to4_To_IR mode sit remote $ip_iran local $ip_kharej
 ip -6 addr add fc00::2/64 dev 6to4_To_IR
@@ -57,12 +65,15 @@ ip link set ipip6Tun_To_IR mtu 1440
 ip link set ipip6Tun_To_IR up
 
 exit 0" > /etc/rc.local
+		chmod +x /etc/rc.local
+		echo "Please configure any server ... "
+		sleep 1m
 		/etc/rc.local
 
 	elif [ $act -eq 3 ]
 	then 
 		rm -rf /etc/rc.local
-		ip tunnel del 6to4_To_IR
+		ip tunnel del ipip6Tun_To_KH
 		ip tunnel del 6to4_To_KH
 		iptables -F
 		iptables -X
@@ -73,7 +84,7 @@ exit 0" > /etc/rc.local
 	then
 		rm -rf /etc/rc.local
 		ip tunnel del 6to4_To_IR
-		ip tunnel del 6to4_To_KH
+		ip tunnel del ipip6Tun_To_IR
 	else
 		echo "Invalid Input Activity !!"
 	fi
