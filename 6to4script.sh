@@ -11,7 +11,7 @@ echo ""
 echo ""
 echo "${magenta}${bold}Angel IV 6to4 Tunnel SCRIPT${endcolor} "
 echo ""
-read -e -p "${green}Which One To Choose:${endcolor}
+read  -p "$(echo -e ${green}Which One To Choose:${endcolor}
 
 ${yellow}1${endcolor} == ${blue}Tunnel IRAN${endcolor}
 ${yellow}2${endcolor} == ${blue}Tunnel KHAREJ${endcolor}
@@ -24,15 +24,15 @@ ${yellow}6${endcolor} == ${blue}Dissable Hybla${endcolor}
 ${yellow}0${endcolor} == ${blue}Exit${endcolor}
 
 
-${green}Enter Number Activity :${endcolor} " act
+${green}Enter Number Activity :${endcolor})" act
 	if [ $act -eq 1 ]
 	then
 		echo ""
-		read -e -p "${yellow}Please Enter IPv4 IRAN :${endcolor} " ip_iran
+		read  -p "$(echo -e ${yellow}Please Enter IPv4 IRAN :${endcolor}) " ip_iran
 		echo ""
-		read -e -p "${yellow}Please Enter IPv4 KHAREJ${endcolor} : " ip_kharej
+		read -p "$(echo -e ${yellow}Please Enter IPv4 KHAREJ${endcolor} :) " ip_kharej
 		echo ""
-		read -e -p "${yellow}Please Enter Port SSH :${endcolor} " ssh_port
+		read -p "$(echo -e ${yellow}Please Enter Port SSH :${endcolor}) " ssh_port
 		echo ""
 		if ! [[ $ssh_port =~ ^[0-9]+$ ]]
 		then
@@ -69,9 +69,9 @@ exit 0" > /etc/rc.local
 	elif [ $act -eq 2 ]
 	then
 		echo ""
-		read -e -p "${yellow}Please Enter IPv4 IRAN${endcolor} : " ip_iran
+		read -p "$(echo ${yellow}Please Enter IPv4 IRAN${endcolor} :) " ip_iran
 		echo ""
-		read -e -p "${yellow}Please Enter IPv4 KHAREJ${endcolor} : " ip_kharej
+		read -p "$(echo -e ${yellow}Please Enter IPv4 KHAREJ${endcolor}) : " ip_kharej
 		echo ""
 		ip tunnel add 6to4_To_IR mode sit remote $ip_iran local $ip_kharej
 		ip -6 addr add fc00::2/64 dev 6to4_To_IR
@@ -116,10 +116,10 @@ exit 0" > /etc/rc.local
 	then
 		kernel="uname -r"
 		echo ""
-		read -e -p "${blue}To Run Hybla, Your Kernel Version Must Be Higher Than 2.6.13${endcolor}
+		read -p "$(echo -e ${blue}To Run Hybla, Your Kernel Version Must Be Higher Than 2.6.13${endcolor}
 ${yellow}Your Kernel Version: $kernel${endcolor}
 
-${green}Will The Performance Continue?${endcolor} ${yellow}(default == y)${endcolor} ${green}y\n ${endcolor}" hybla
+${green}Will The Performance Continue?${endcolor} ${yellow}(default == y)${endcolor} ${green}y\n ${endcolor})" hybla
 		hybla=${hybla:-"y"}
 		if [[ $hybla == "y" ]]
 		then
