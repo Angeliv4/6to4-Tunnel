@@ -28,11 +28,11 @@ ${green}Enter Number Activity :${endcolor} " act
 	if [ $act -eq 1 ]
 	then
 		echo ""
-		read -p "${yellow}Please Enter IPv4 IRAN :${endcolor} " ip_iran
+		read -e -p "${yellow}Please Enter IPv4 IRAN :${endcolor} " ip_iran
 		echo ""
-		read -p "${yellow}Please Enter IPv4 KHAREJ${endcolor} : " ip_kharej
+		read -e -p "${yellow}Please Enter IPv4 KHAREJ${endcolor} : " ip_kharej
 		echo ""
-		read -p "${yellow}Please Enter Port SSH :${endcolor} " ssh_port
+		read -e -p "${yellow}Please Enter Port SSH :${endcolor} " ssh_port
 		echo ""
 		if ! [[ $ssh_port =~ ^[0-9]+$ ]]
 		then
@@ -61,7 +61,7 @@ iptables -t nat -A POSTROUTING -j MASQUERADE
 
 exit 0" > /etc/rc.local
 			chmod +x /etc/rc.local
-			echo "${green}Please Configure Other Server And Wait 1 Minute ...${endcolor}"
+			echo -e "${green}Please Configure Other Server And Wait 1 Minute ...${endcolor}"
 			sleep 1m
 			/etc/rc.local
 		fi
@@ -69,9 +69,9 @@ exit 0" > /etc/rc.local
 	elif [ $act -eq 2 ]
 	then
 		echo ""
-		read -p "${yellow}Please Enter IPv4 IRAN${endcolor} : " ip_iran
+		read -e -p "${yellow}Please Enter IPv4 IRAN${endcolor} : " ip_iran
 		echo ""
-		read -p "${yellow}Please Enter IPv4 KHAREJ${endcolor} : " ip_kharej
+		read -e -p "${yellow}Please Enter IPv4 KHAREJ${endcolor} : " ip_kharej
 		echo ""
 		ip tunnel add 6to4_To_IR mode sit remote $ip_iran local $ip_kharej
 		ip -6 addr add fc00::2/64 dev 6to4_To_IR
@@ -91,7 +91,7 @@ ip link set ipip6Tun_To_IR up
 
 exit 0" > /etc/rc.local
 		chmod +x /etc/rc.local
-		echo "${green}Please Configure Other Server And Wait ...${endcolor} "
+		echo -e "${green}Please Configure Other Server And Wait ...${endcolor} "
 		sleep 1m
 		/etc/rc.local
 
@@ -106,7 +106,7 @@ exit 0" > /etc/rc.local
 		iptables -P FORWARD ACCEPT
 		iptables -P OUTPUT ACCEPT
 		echo ""
-		echo "${green}Please Reboot Server !${endcolor}"
+		echo -e "${green}Please Reboot Server !${endcolor}"
 	elif [ $act -eq 4 ]
 	then
 		rm -rf /etc/rc.local
@@ -116,7 +116,7 @@ exit 0" > /etc/rc.local
 	then
 		kernel="uname -r"
 		echo ""
-		read -p "${blue}To Run Hybla, Your Kernel Version Must Be Higher Than 2.6.13${endcolor}
+		read -e -p "${blue}To Run Hybla, Your Kernel Version Must Be Higher Than 2.6.13${endcolor}
 ${yellow}Your Kernel Version: $kernel${endcolor}
 
 ${green}Will The Performance Continue?${endcolor} ${yellow}(default == y)${endcolor} ${green}y\n ${endcolor}" hybla
@@ -125,22 +125,22 @@ ${green}Will The Performance Continue?${endcolor} ${yellow}(default == y)${endco
 		then
 			sudo modprobe tcp_hybla
 			sudo sysctl -w net.ipv4.tcp_congestion_control=hybla
-			echo "net.ipv4.tcp_congestion_control=hybla" >> /etc/sysctl.conf
+			echo -e "net.ipv4.tcp_congestion_control=hybla" >> /etc/sysctl.conf
 			sudo sysctl -p
 			if sysctl net.ipv4.tcp_available_congestion_control | grep -q 'hybla';
 			then
 				echo ""
-				echo "${green}Hybla Is Enabled ...${endcolor}"
+				echo -e "${green}Hybla Is Enabled ...${endcolor}"
 			else
 				echo ""
-				echo "${red}Hybla Is Not Enabled !${endcolor}"
+				echo -e "${red}Hybla Is Not Enabled !${endcolor}"
 			fi
 		elif [[ $hybla == "n" ]]
 		then
 			bash <(curl -Ls https://raw.githubusercontent.com/Angeliv4/6to4-Tunnel/main/6to4script.sh)
 		else
 			echo ""
-			echo "${red}Invalid Input Activity !!${endcolor}"
+			echo -e "${red}Invalid Input Activity !!${endcolor}"
 		fi
 	elif [ $act -eq 6 ]
 	then
@@ -150,18 +150,18 @@ ${green}Will The Performance Continue?${endcolor} ${yellow}(default == y)${endco
 				sudo sed -i 's/net.ipv4.tcp_congestion_control=hybla/net.ipv4.tcp_congestion_control=cubic/' /etc/sysctl.conf
 				sudo sysctl -p
 				echo ""
-				echo "${green}Hybla Is Not Enabled !${endcolor}"
-				sysctl net.ipv4.tcp_available_congestion_control
+				echo -e "${green}Hybla Is Not Enabled !${endcolor}"
+				sysctl net.ipv4.tcp_congestion_control
 			else
 				echo ""
-				echo "${red}Hybla Is Not Enabled !${endcolor}"
+				echo -e "${red}Hybla Is Not Enabled !${endcolor}"
 		fi
 	elif [ $act -eq 0 ]
 	then
 		echo ""
-		echo "${magenta}${bold}Good By My Freind .${endcolor}"
+		echo -e "${magenta}${bold}Good By My Freind .${endcolor}"
 	
 	else
 		echo ""
-		echo "${red}Invalid Input Activity !!${endcolor}"
+		echo -e "${red}Invalid Input Activity !!${endcolor}"
 	fi
