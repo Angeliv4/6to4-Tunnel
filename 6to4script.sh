@@ -11,7 +11,7 @@ echo ""
 echo ""
 echo "${magenta}${bold}Angel IV 6to4 Tunnel SCRIPT${endcolor} "
 echo ""
-read  -p "$(echo -e ${green}Which One To Choose:${endcolor}
+read -p "$(echo -e ${green}Which One To Choose:${endcolor}
 
 ${yellow}1${endcolor} == ${blue}Tunnel IRAN${endcolor}
 ${yellow}2${endcolor} == ${blue}Tunnel KHAREJ${endcolor}
@@ -28,7 +28,7 @@ ${green}Enter Number Activity :${endcolor})" act
 	if [ $act -eq 1 ]
 	then
 		echo ""
-		read  -p "$(echo -e ${yellow}Please Enter IPv4 IRAN :${endcolor}) " ip_iran
+		read -p "$(echo -e ${yellow}Please Enter IPv4 IRAN :${endcolor}) " ip_iran
 		echo ""
 		read -p "$(echo -e ${yellow}Please Enter IPv4 KHAREJ${endcolor} :) " ip_kharej
 		echo ""
