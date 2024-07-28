@@ -9,7 +9,7 @@ bold="\e[1m"
 
 echo ""
 echo ""
-echo "${magenta}${bold}Angel IV 6to4 Tunnel SCRIPT${endcolor} "
+echo -e "${magenta}${bold}Angel IV 6to4 Tunnel SCRIPT${endcolor} "
 echo ""
 read -p "$(echo -e ${green}Which One To Choose:${endcolor}
 
