@@ -17,7 +17,10 @@ ${yellow}2${endcolor} == ${blue}Tunnel KHAREJ${endcolor}\n\
 ${yellow}3${endcolor} == ${blue}Remove Tunnel IRAN${endcolor}\n\
 ${yellow}4${endcolor} == ${blue}Remove Tunnel Kharej${endcolor}\n\n\
 ${yellow}5${endcolor} == ${blue}Enable Hybla${endcolor}\n\
-${yellow}6${endcolor} == ${blue}Dissable Hybla${endcolor}\n\n\
+${yellow}6${endcolor} == ${blue}Disable Hybla${endcolor}\n\
+${yellow}7${endcolor} == ${blue}Enable Bbr${endcolor}\n\
+${yellow}8${endcolor} == ${blue}Disable Bbr${endcolor}\n\n\
+${yellow}9${endcolor} == ${blue} Run Bench Script${endcolor}\n\n\
 ${yellow}0${endcolor} == ${blue}Exit${endcolor}\n\n\
 ${green}Enter Number Activity :${endcolor}")" act
 	if [ $act -eq 1 ]
@@ -114,7 +117,7 @@ exit 0" > /etc/rc.local
 		echo ""
 		read -p "$(echo -e "${blue}To Run Hybla, Your Kernel Version Must Be Higher Than 2.6.13${endcolor}\n\
 ${yellow}Your Kernel Version: $kernel${endcolor}\n\n\
-${green}Will The Performance Continue?${endcolor} ${yellow}(default = y)${endcolor}${blue}y/n${endcolor}")" hybla
+${green}Will The Performance Continue?${endcolor} ${yellow}(default = y)${endcolor}${green} y/n : ${endcolor}")" hybla
 		hybla=${hybla:-"y"}
 		if [[ $hybla == "y" ]]
 		then
@@ -158,10 +161,64 @@ ${green}Will The Performance Continue?${endcolor} ${yellow}(default = y)${endcol
 				echo ""
 				echo -e "${red}Hybla Is Not Enabled !${endcolor}"
 		fi
+	elif [ $act -eq 7 ]
+	then
+		kernel=$(uname -r)
+		echo ""
+		read -p "$(echo -e "${blue}To Run Bbr, Your Kernel Version Must Be Higher Than 4.9${endcolor}\n\
+${yellow}Your Kernel Version: $kernel${endcolor}\n\n\
+${green}Will The Performance Continue?${endcolor} ${yellow}(default = y)${endcolor}${green} y/n : ${endcolor}")" bbr
+		bbr=${bbr:-"y"}
+		if [[ $bbr == "y" ]]
+		then
+			sudo modprobe tcp_bbr
+			grep -qxF "tcp_bbr" /etc/modules-load.d/modules.conf || echo "tcp_bbr" | sudo tee -a /etc/modules-load.d/modules.conf
+			if grep -q "net.core.default_qdisc=" /etc/sysctl.conf; 
+			then
+				sudo sed -i 's/^net.core.default_qdisc=.*/net.core.default_qdisc=fq/' /etc/sysctl.conf
+			else
+				echo "net.core.default_qdisc=fq" | sudo tee -a /etc/sysctl.conf
+			fi
+			if grep -q "net.ipv4.tcp_congestion_control=" /etc/sysctl.conf;
+			then
+				sudo sed -i 's/^net.ipv4.tcp_congestion_control=.*/net.ipv4.tcp_congestion_control=bbr/' /etc/sysctl.conf
+			else
+				echo "net.ipv4.tcp_congestion_control=bbr" | sudo tee -a /etc/sysctl.conf
+			fi
+			sudo sysctl -p
+			echo ""
+			echo -e "${green}Bbr Is Enabled !${endcolor}"
+		elif [[ $bbr == "n" ]]
+		then
+			bash <(curl -Ls https://raw.githubusercontent.com/Angeliv4/6to4-Tunnel/main/6to4script.sh)
+		else
+			echo ""
+			echo -e "${red}Invalid Input Activity !!${endcolor}"
+		fi
+	elif [ $act -eq 8 ]
+	then
+		if grep -q "net.core.default_qdisc=" /etc/sysctl.conf; 
+			then
+				sudo sed -i 's/^net.core.default_qdisc=.*/net.core.default_qdisc=fq_codel/' /etc/sysctl.conf
+			else
+				echo "net.core.default_qdisc=fq" | sudo tee -a /etc/sysctl.conf
+		fi
+		if grep -q "net.ipv4.tcp_congestion_control=" /etc/sysctl.conf;
+			then
+				sudo sed -i 's/^net.ipv4.tcp_congestion_control=.*/net.ipv4.tcp_congestion_control=cubic/' /etc/sysctl.conf
+			else
+				echo "net.ipv4.tcp_congestion_control=cubic" | sudo tee -a /etc/sysctl.conf
+		fi
+		sudo sysctl -p
+		echo ""
+		echo -e "${green}Bbr Is Not Enabled !${endcolor}"
+	elif [ $act -eq 9 ]
+	then
+		curl -Lso- bench.sh | bash
 	elif [ $act -eq 0 ]
 	then
 		echo ""
-		echo -e "${magenta}${bold}Good By My Freind .${endcolor}"
+		echo -e "${magenta}${bold}Good Bye My Freind .${endcolor}"
 	
 	else
 		echo ""
