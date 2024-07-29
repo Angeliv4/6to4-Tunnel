@@ -87,7 +87,7 @@ ip link set ipip6Tun_To_IR up
 
 exit 0" > /etc/rc.local
 		chmod +x /etc/rc.local
-		echo -e "${green}Please Configure Other Server And Wait ...${endcolor} "
+		echo -e "${green}Please Configure Other Server And Wait 1 Minute ...${endcolor} "
 		sleep 1m
 		/etc/rc.local
 
@@ -114,8 +114,7 @@ exit 0" > /etc/rc.local
 		echo ""
 		read -p "$(echo -e "${blue}To Run Hybla, Your Kernel Version Must Be Higher Than 2.6.13${endcolor}\n\n\
 ${yellow}Your Kernel Version: $kernel${endcolor}\n\
-${green}Will The Performance Continue?${endcolor} ${yellow}(default == y)${endcolor} ${green}y\n ${endcolor}")" hybla
-		hybla=${hybla:-"y"}
+${green}Will The Performance Continue?${endcolor} ${yellow}(default == y)${endcolor} ${green}y\n ${endcolor}")" hybla=${hybla:-"y"}
 		if [[ $hybla == "y" ]]
 		then
 			sudo modprobe tcp_hybla
