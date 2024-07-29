@@ -20,7 +20,7 @@ ${yellow}5${endcolor} == ${blue}Enable Hybla${endcolor}\n\
 ${yellow}6${endcolor} == ${blue}Disable Hybla${endcolor}\n\
 ${yellow}7${endcolor} == ${blue}Enable Bbr${endcolor}\n\
 ${yellow}8${endcolor} == ${blue}Disable Bbr${endcolor}\n\n\
-${yellow}9${endcolor} == ${blue} Run Bench Script${endcolor}\n\n\
+${yellow}9${endcolor} == ${blue}Run Bench Script${endcolor}\n\n\
 ${yellow}0${endcolor} == ${blue}Exit${endcolor}\n\n\
 ${green}Enter Number Activity :${endcolor}")" act
 	if [ $act -eq 1 ]
