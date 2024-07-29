@@ -110,11 +110,11 @@ exit 0" > /etc/rc.local
 		ip tunnel del ipip6Tun_To_IR
 	elif [ $act -eq 5 ]
 	then
-		kernel="uname -r"
+		kernel=uname -r
 		echo ""
 		read -p "$(echo -e "${blue}To Run Hybla, Your Kernel Version Must Be Higher Than 2.6.13${endcolor}\n\n\
 ${yellow}Your Kernel Version: $kernel${endcolor}\n\
-${green}Will The Performance Continue?${endcolor} ${yellow}(default == y)${endcolor} ${green}y\n ${endcolor}")" hybla=${hybla:-"y"}
+${green}Will The Performance Continue?${endcolor} ${yellow}(default == y)${endcolor}")" hybla=${hybla:-"y"}
 		if [[ $hybla == "y" ]]
 		then
 			sudo modprobe tcp_hybla
