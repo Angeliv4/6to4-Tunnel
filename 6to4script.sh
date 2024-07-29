@@ -65,7 +65,7 @@ exit 0" > /etc/rc.local
 	elif [ $act -eq 2 ]
 	then
 		echo ""
-		read -p "$(echo ${yellow}Please Enter IPv4 IRAN${endcolor} :) " ip_iran
+		read -p "$(echo -e ${yellow}Please Enter IPv4 IRAN${endcolor} :) " ip_iran
 		echo ""
 		read -p "$(echo -e ${yellow}Please Enter IPv4 KHAREJ${endcolor}) : " ip_kharej
 		echo ""
@@ -146,7 +146,6 @@ ${green}Will The Performance Continue?${endcolor} ${yellow}(default == y)${endco
 				sudo sysctl -p
 				echo ""
 				echo -e "${green}Hybla Is Not Enabled !${endcolor}"
-				sysctl net.ipv4.tcp_congestion_control
 			else
 				echo ""
 				echo -e "${red}Hybla Is Not Enabled !${endcolor}"
