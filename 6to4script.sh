@@ -11,20 +11,15 @@ echo ""
 echo ""
 echo -e "${magenta}${bold}Angel IV 6to4 Tunnel SCRIPT${endcolor} "
 echo ""
-read -p "$(echo -e ${green}Which One To Choose:${endcolor}
-
-${yellow}1${endcolor} == ${blue}Tunnel IRAN${endcolor}
-${yellow}2${endcolor} == ${blue}Tunnel KHAREJ${endcolor}
-${yellow}3${endcolor} == ${blue}Remove Tunnel IRAN${endcolor}
-${yellow}4${endcolor} == ${blue}Remove Tunnel Kharej${endcolor}
-
-${yellow}5${endcolor} == ${blue}Enable Hybla${endcolor}
-${yellow}6${endcolor} == ${blue}Dissable Hybla${endcolor}
-
-${yellow}0${endcolor} == ${blue}Exit${endcolor}
-
-
-${green}Enter Number Activity :${endcolor})" act
+read -p "$(echo -e "${green}Which One To Choose:${endcolor}\n\n\
+${yellow}1${endcolor} == ${blue}Tunnel IRAN${endcolor}\n\
+${yellow}2${endcolor} == ${blue}Tunnel KHAREJ${endcolor}\n\
+${yellow}3${endcolor} == ${blue}Remove Tunnel IRAN${endcolor}\n\
+${yellow}4${endcolor} == ${blue}Remove Tunnel Kharej${endcolor}\n\n\
+${yellow}5${endcolor} == ${blue}Enable Hybla${endcolor}\n\
+${yellow}6${endcolor} == ${blue}Dissable Hybla${endcolor}\n\n\
+${yellow}0${endcolor} == ${blue}Exit${endcolor}\n\n\
+${green}Enter Number Activity :${endcolor}")" act
 	if [ $act -eq 1 ]
 	then
 		echo ""
@@ -63,6 +58,7 @@ exit 0" > /etc/rc.local
 			chmod +x /etc/rc.local
 			echo -e "${green}Please Configure Other Server And Wait 1 Minute ...${endcolor}"
 			sleep 1m
+			chmod +x /etc/rc.local
 			/etc/rc.local
 		fi
 	
