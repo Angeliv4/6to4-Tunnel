@@ -112,9 +112,8 @@ exit 0" > /etc/rc.local
 	then
 		kernel="uname -r"
 		echo ""
-		read -p "$(echo -e ${blue}To Run Hybla, Your Kernel Version Must Be Higher Than 2.6.13${endcolor}
-${yellow}Your Kernel Version: $kernel${endcolor}
-
+		read -p "$(echo -e ${blue}To Run Hybla, Your Kernel Version Must Be Higher Than 2.6.13${endcolor}\n\n\
+${yellow}Your Kernel Version: $kernel${endcolor}\n\
 ${green}Will The Performance Continue?${endcolor} ${yellow}(default == y)${endcolor} ${green}y\n ${endcolor})" hybla
 		hybla=${hybla:-"y"}
 		if [[ $hybla == "y" ]]
