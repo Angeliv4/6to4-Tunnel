@@ -128,6 +128,7 @@ ${green}Will The Performance Continue?${endcolor} ${yellow}(default = y)${endcol
 				sudo sed -i "s/^$order.*/$order=$feedback/" "$file"
 			else
 				echo "net.ipv4.tcp_congestion_control=hybla" >> /etc/sysctl.conf
+			fi
 			sudo sysctl -p
 			if sysctl net.ipv4.tcp_available_congestion_control | grep -q 'hybla';
 			then
