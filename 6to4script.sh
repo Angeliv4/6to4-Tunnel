@@ -62,7 +62,9 @@ exit 0" > /etc/rc.local
 			echo -e "${green}Please Configure Other Server And Wait 1 Minute ...${endcolor}"
 			sleep 1m
 			chmod +x /etc/rc.local
-			/etc/rc.local
+			/etc/rc.local > /dev/null
+			echo ""
+			echo -e "${green}tunnel is running ...${endcolor}"
 		fi
 	
 	elif [ $act -eq 2 ]
@@ -92,8 +94,9 @@ exit 0" > /etc/rc.local
 		chmod +x /etc/rc.local
 		echo -e "${green}Please Configure Other Server And Wait 1 Minute ...${endcolor} "
 		sleep 1m
-		/etc/rc.local
-
+		/etc/rc.local > /dev/null
+		echo ""
+		echo -e "${green}tunnel is running ...${endcolor}"
 	elif [ $act -eq 3 ]
 	then 
 		rm -rf /etc/rc.local
