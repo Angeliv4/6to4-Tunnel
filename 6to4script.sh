@@ -99,7 +99,6 @@ exit 0" > /etc/rc.local
 		echo -e "${green}tunnel is running ...${endcolor}"
 	elif [ $act -eq 3 ]
 	then 
-		rm -rf /etc/rc.local
 		ip tunnel del ipip6Tun_To_KH
 		ip tunnel del 6to4_To_KH
 		iptables -F
@@ -107,6 +106,7 @@ exit 0" > /etc/rc.local
 		iptables -P INPUT ACCEPT
 		iptables -P FORWARD ACCEPT
 		iptables -P OUTPUT ACCEPT
+		rm -r /etc/rc.local
 		echo ""
 		echo -e "${green}Please Reboot Server !${endcolor}"
 	elif [ $act -eq 4 ]
